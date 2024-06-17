@@ -6,6 +6,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,13 +21,14 @@ public class UserRegisterRequestDto {
     private String username;
 
     @Size(min = 10)
-    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_])*$")
-    private String password; // 로그인 Password
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{10,}$")
+    private String password;
 
     private String name; // 이름
 
     @Email
     private String email;
+
     private String oneLine;
 
     private String statusCode;

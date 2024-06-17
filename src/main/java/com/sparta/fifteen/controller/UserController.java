@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    private ResponseEntity<?> signup(@RequestBody UserRegisterRequestDto requestDto) {
+    public ResponseEntity<?> signup(@RequestBody UserRegisterRequestDto requestDto) {
         try {
             UserRegisterResponseDto responseDto = userService.registerUser(requestDto);
             return ResponseEntity.ok().body(responseDto);
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    private ResponseEntity<?> userLogin(@RequestBody UserRequestDto requestDto) {
+    public ResponseEntity<?> userLogin(@RequestBody UserRequestDto requestDto) {
         try {
             String token = authenticationService.loginUser(requestDto);
             return ResponseEntity.ok().header(JwtConfig.staticHeader, JwtConfig.staticTokenPrefix + token).body(token);
@@ -62,7 +62,7 @@ public class UserController {
 
 
     @PostMapping("/user/logout")
-    private ResponseEntity<?> userLogout(@RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<?> userLogout(@RequestHeader("Authorization") String authorizationHeader) {
         try {
             String accessToken = authorizationHeader.replace(JwtConfig.staticTokenPrefix, "");
 
