@@ -15,9 +15,7 @@ public class UserRegisterResponseDto {
     private String oneLine;
     private RefreshToken userRefreshToken;
     private String statusCode;
-    private Timestamp statusChangedTime; // null 값이 들어감 후에 다듬을 예정 -> 주석처리 하면 responseDto에서 보이지 않음
     private Timestamp createdOn;
-    private Timestamp modifiedOn; // null 값이 들어감 후에 다듬을 예정 -> 주석처리 하면 responseDto에서 보이지 않음
 
     public UserRegisterResponseDto(User user) {
         this.id = user.getId();

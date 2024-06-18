@@ -5,6 +5,7 @@ import com.sparta.fifteen.dto.UserRegisterRequestDto;
 import com.sparta.fifteen.dto.UserRegisterResponseDto;
 import com.sparta.fifteen.dto.UserRequestDto;
 import com.sparta.fifteen.error.PasswordMismatchException;
+import com.sparta.fifteen.error.UserAlreadyExistsException;
 import com.sparta.fifteen.error.UserPendingException;
 import com.sparta.fifteen.error.UserWithdrawnException;
 import com.sparta.fifteen.service.AuthenticationService;
@@ -35,10 +36,12 @@ public class UserController {
         try {
             UserRegisterResponseDto responseDto = userService.registerUser(requestDto);
             return ResponseEntity.ok().body(responseDto);
-        } catch (IllegalArgumentException e) {
+        } catch (UserAlreadyExistsException e) {
             return ResponseEntity.badRequest().body("이미 존재하는 User ID 입니다. 회원가입에 실패하셨습니다.");
         } catch (InputMismatchException e) {
             return ResponseEntity.badRequest().body("잘못된 비밀번호 형식입니다. 회원가입에 실패하셨습니다.");
+        } catch (UserWithdrawnException e) {
+            return ResponseEntity.badRequest().body("탈퇴한 계정은 다시 사용할 수 없습니다.");
         }
     }
 
