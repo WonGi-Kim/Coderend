@@ -50,7 +50,7 @@ public class UserService {
         }
 
         if (requestDto.getPassword().length() < 10) {
-            throw new InputMismatchException("잘못된 비밀번호 형식");
+            throw new PasswordMismatchException("잘못된 비밀번호 형식");
         }
 
         User user = initializeUser(requestDto);
